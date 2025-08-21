@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/header', { pageTitle: 'Smart Library - Home' }) %>
+<body>
+  <main class="container my-5">
+    <% if (!isAuthenticated) { %>
+      <!-- Content for non-authenticated users -->
+      <section class="hero text-center mb-5">
+        <h2>Welcome to Smart Library</h2>
+        <p>Your digital gateway to knowledge and learning</p>
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body text-center">
+                <h4>New User?</h4>
+                <p>Join our library community and get access to thousands of resources.</p>
+                <a href="/register" class="btn btn-primary btn-lg">Register Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body text-center">
+                <h4>Already a Member?</h4>
+                <p>Sign in to access your account and explore our collection.</p>
+                <a href="/login" class="btn btn-success btn-lg">Login</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <% } else { %>
+      <!-- Content for authenticated users -->
+      <section class="hero text-center mb-5">
+        <h2>Welcome back, <%= user.name %>!</h2>
+        <p>Your digital gateway to knowledge and learning</p>
+        <div class="row mt-4 stats">
+          <div class="col-md-3 text-center">
+            <h3>5000+</h3>
+            <p>Members</p>
+          </div>
+          <div class="col-md-3 text-center">
+            <h3>24/7</h3>
+            <p>Access</p>
+          </div>
+          <div class="col-md-3 text-center">
+            <h3>50,000+</h3>
+            <p>Books</p>
+          </div>
+          <div class="col-md-3 text-center">
+            <h3>100+</h3>
+            <p>Categories</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="text-center my-5">
+        <h2>Search for Books</h2>
+        <p>Explore our vast collection of books, journals, and digital resources.</p>
+        <a href="/explore" class="btn btn-primary btn-lg">Start Exploring</a>
+      </section>
+
+      <section class="text-center my-5">
+        <h2>Track Your Activity</h2>
+        <p>Monitor your borrowing history, manage renewals, and check due dates.</p>
+        <a href="/activity" class="btn btn-success btn-lg">View Activity</a>
+      </section>
+    <% } %>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

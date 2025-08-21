@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/header', { pageTitle: 'Activity - Smart Library', isAuthenticated: isAuthenticated }) %>
+<body>
+  <main class="container mt-5">
+    <h2>Your Activity</h2>
+
+    <% if (activities && activities.length > 0) { %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Book Title</th>
+            <th>Issue Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% activities.forEach(activity => { %>
+            <tr>
+              <td><%= activity.bookId ? activity.bookId.title : 'Unknown Book' %></td>
+              <td><%= new Date(activity.createdAt).toLocaleDateString() %></td>
+              <td><%= activity.dueDate ? new Date(activity.dueDate).toLocaleDateString() : 'N/A' %></td>
+              <td>
+                <% if(activity.action === 'return') { %>
+                  <span class="badge bg-success">Returned</span>
+                <% } else if(activity.action === 'borrow') { %>
+                  <span class="badge bg-warning">Borrowed</span>
+                <% } %>
+              </td>
+              <td>
+                <% if(activity.action === 'borrow') { %>
+                  <form method="POST" action="/books/return/<%= activity.bookId ? activity.bookId._id : '' %>" style="display: inline;">
+                    <button class="btn btn-warning btn-sm">Return Book</button>
+                  </form>
+                <% } %>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No activities found.</p>
+    <% } %>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

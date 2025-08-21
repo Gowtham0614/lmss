@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/header', { pageTitle: 'Profile - Smart Library', isAuthenticated: isAuthenticated }) %>
+<body>
+  <main class="container mt-5 col-md-6">
+    <h2>Your Profile</h2>
+
+    <form action="/profile" method="POST" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" id="name" name="name" class="form-control" value="<%= user ? user.name : '' %>" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" id="email" name="email" class="form-control" value="<%= user ? user.email : '' %>" required readonly>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

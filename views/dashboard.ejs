@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/header', { pageTitle: 'Dashboard - Smart Library', isAuthenticated: isAuthenticated, user: user }) %>
+<body>
+  <main class="container my-5">
+    <!-- Welcome section for authenticated users -->
+    <section class="hero text-center mb-5">
+      <h2>Welcome back, <%= user ? user.name : 'User' %>!</h2>
+      <p>Your digital gateway to knowledge and learning</p>
+      <div class="row mt-4 stats">
+        <div class="col-md-3 text-center">
+          <h3>5000+</h3>
+          <p>Members</p>
+        </div>
+        <div class="col-md-3 text-center">
+          <h3>24/7</h3>
+          <p>Access</p>
+        </div>
+        <div class="col-md-3 text-center">
+          <h3>50,000+</h3>
+          <p>Books</p>
+        </div>
+        <div class="col-md-3 text-center">
+          <h3>100+</h3>
+          <p>Categories</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Quick Actions Section -->
+    <section class="text-center my-5">
+      <h2>Quick Actions</h2>
+      <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-search fa-3x mb-3 text-primary"></i>
+              <h4>Search for Books</h4>
+              <p>Explore our vast collection of books, journals, and digital resources.</p>
+              <a href="/explore" class="btn btn-primary btn-lg">Start Exploring</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-history fa-3x mb-3 text-success"></i>
+              <h4>Track Your Activity</h4>
+              <p>Monitor your borrowing history, manage renewals, and check due dates.</p>
+              <a href="/activity" class="btn btn-success btn-lg">View Activity</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-user fa-3x mb-3 text-info"></i>
+              <h4>Manage Profile</h4>
+              <p>Update your personal information and account settings.</p>
+              <a href="/profile" class="btn btn-info btn-lg">View Profile</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Activity Preview -->
+    <section class="my-5">
+      <h3>Recent Activity</h3>
+      <div class="card">
+        <div class="card-body">
+          <p class="text-muted">Your recent borrowing activity will appear here.</p>
+          <a href="/activity" class="btn btn-outline-primary">View All Activity</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Books Section -->
+    <section class="my-5">
+      <h3>Featured Books</h3>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="text-muted">Discover new and popular books in our collection.</p>
+              <a href="/explore" class="btn btn-outline-primary">Browse Collection</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <%- include('partials/footer') %>
+</body>
+</html>

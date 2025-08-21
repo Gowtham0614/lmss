@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/header', { pageTitle: 'Explore Books - Smart Library', isAuthenticated: isAuthenticated }) %>
+<body>
+  <main class="container mt-5">
+    <h2>Explore Books</h2>
+
+    <form class="row mb-4" method="GET" action="/explore">
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="search" placeholder="Search by title or author" value="<%= typeof search !== 'undefined' ? search : '' %>"/>
+      </div>
+      <div class="col-md-3">
+        <select class="form-select" name="category">
+          <option value="">All Categories</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          <option value="Academic">Academic</option>
+          <option value="Reference">Reference</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select class="form-select" name="availability">
+          <option value="">All Availability</option>
+          <option value="Available">Available Now</option>
+          <option value="Issued">Issued</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100" type="submit">Search</button>
+      </div>
+    </form>
+
+    <div class="row">
+      <% if (books && books.length > 0) { %>
+        <% books.forEach(book => { %>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><%= book.title %></h5>
+                <h6 class="card-subtitle mb-2 text-muted">By <%= book.author %></h6>
+                <p class="card-text"><%= book.category %></p>
+                <p>
+                  <span class="badge <%= book.availability === 'Available' ? 'bg-success' : 'bg-danger' %>">
+                    <%= book.availability %>
+                  </span>
+                </p>
+                <% if (book.availability === 'Available') { %>
+                  <form method="POST" action="/books/borrow/<%= book._id %>">
+                    <button class="btn btn-primary">Borrow Now</button>
+                  </form>
+                <% } else { %>
+                  <button class="btn btn-secondary" disabled>Not Available</button>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No books found.</p>
+      <% } %>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
